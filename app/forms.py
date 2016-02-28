@@ -16,13 +16,19 @@ def age_validator(form , field):
         field.errors.append('Age must be an integer')
         return False
 
+def image_file_validator(form , field):
+    extension = field.data.filename.split('.')[-1].lower()
+    if not extension in ('jpg' , 'jpeg' , 'png'):
+        field.errors.append('Files must be either jpg or png format')
+        return False
+    return True
 
 class UserForm(Form):
     firstname = TextField('First Name' , validators=[Required()])
     lastname = TextField('Last Name' , validators=[Required()])
     age = IntegerField('Age' , validators=[age_validator,Required()])
     sex = SelectField('Sex' , choices = [('male','Male') , ('female' , 'Female')])
-    image = FileField('Profile Picture' , validators=[Required()])
+    image = FileField('Profile Picture' , validators=[image_file_validator,Required()])
 
 
             

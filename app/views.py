@@ -12,12 +12,12 @@ def new():
     if request.method == 'GET':
         return render_template('new.html', form=form)
     elif form.validate():
-        firstname = form.firstname
-        lastname = form.lastname
-        sex = form.sex
-        age = form.age
-        image = form.image
-        return 'Valid'
+        firstname = form.firstname.data
+        lastname = form.lastname.data
+        sex = form.sex.data
+        age = form.age.data
+        image = form.image.data
+        return image.filename
     else:
         return render_template('new.html' , form=form,errors=form.errors.items())
 
