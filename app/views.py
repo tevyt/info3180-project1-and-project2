@@ -1,5 +1,6 @@
 from app import app
 from flask import url_for, redirect, render_template
+from app.forms import UserForm
 
 @app.route('/')
 def root():
@@ -7,7 +8,8 @@ def root():
 
 @app.route('/profile' , methods=['GET' , 'POST'])
 def new():
-    return render_template('new.html')
+    form = UserForm()
+    return render_template('new.html', form=form)
 
 @app.route('/profiles')
 def index():
