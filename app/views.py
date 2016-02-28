@@ -1,6 +1,5 @@
 from app import app
-from flask import url_for, redirect
-# from flask import render_template
+from flask import url_for, redirect, render_template
 
 @app.route('/')
 def root():
@@ -8,7 +7,7 @@ def root():
 
 @app.route('/profile' , methods=['GET' , 'POST'])
 def new():
-    return 'TO DO'
+    return render_template('new.html')
 
 @app.route('/profiles')
 def index():

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="shortcut icon" href="/static/favicon.ico">
+
+		<!-- HTML5 shim, for IE 6-8 support of HTML elements -->
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+		{% block css %}{% endblock %}
+
+	</head>
+
+	<body>
+
+		<div id="main" role="main">
+			{% block main %}{% endblock %}
+		</div>
+
+
+		<!-- Additional JavaScript libraries and plugins... -->
+		{% block js %}{% endblock %}
+
+
+	</body>
+</html>
