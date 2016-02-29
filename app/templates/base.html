@@ -33,6 +33,17 @@
 		{%endwith%}
 
 
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="{{url_for('new')}}">
+						<button class="btn btn-primary">
+							New Profile
+						</button>
+					</a>
+				</div>
+			</div>
+		</nav>
 		<div id="main" role="main">
 			{% block main %}{% endblock %}
 		</div>

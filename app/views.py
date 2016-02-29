@@ -1,5 +1,6 @@
+import json
 from app import app
-from flask import url_for, redirect, render_template, request , flash
+from flask import url_for, redirect, render_template, request , flash, jsonify, Response
 from app.forms import UserForm
 from app import db
 from app.models import User
@@ -36,6 +37,13 @@ def new():
 @app.route('/profiles')
 def index():
     users = db.session.query(User).all()
+    if request.headers['Content-Type'] == 'application/json':
+        user_json = []
+        for user in users:
+            user_json.append({'username': user.username , 'user_id': user.user_id})
+        return Response(json.dumps(user_json) , mimetype='application/json')
+        
+
     if len(users) == 0:
         return 'No Registered Users'
     return render_template('index.html' , users=users)
