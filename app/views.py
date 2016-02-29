@@ -40,10 +40,9 @@ def index():
     if request.headers['Content-Type'] == 'application/json':
         user_json = []
         for user in users:
-            user_json.append({'username': user.username , 'user_id': user.user_id})
+            user_json.append({'username': user.username , 'userid': user.user_id})
         return Response(json.dumps(user_json) , mimetype='application/json')
         
-
     if len(users) == 0:
         return 'No Registered Users'
     return render_template('index.html' , users=users)
@@ -55,6 +54,8 @@ def show(user_id):
     if user == None:
         return render_template('404.html'), 404
     date = format_date(user.added_on)
+    if request.headers['Content-Type'] == 'application/json':
+        return jsonify(userid=user.user_id , username=user.username , image=user.file_location , age=user.age , profile_added_on=date)
     return render_template('show.html', user=user , date=date)
 
 @app.errorhandler(404)
