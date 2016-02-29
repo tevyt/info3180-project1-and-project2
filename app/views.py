@@ -36,14 +36,22 @@ def new():
 @app.route('/profiles')
 def index():
     users = db.session.query(User).all()
+    if len(users) == 0:
+        return 'No Registered Users'
     return render_template('index.html' , users=users)
 
 
 @app.route('/profile/<user_id>')
 def show(user_id):
     user = db.session.query(User).filter_by(user_id=user_id).first()
+    if user == None:
+        return render_template('404.html'), 404
     date = format_date(user.added_on)
     return render_template('show.html', user=user , date=date)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 def format_date(date):
     return date.strftime('%a %W %b %Y')
