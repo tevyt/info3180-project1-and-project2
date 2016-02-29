@@ -35,7 +35,9 @@ def new():
 
 @app.route('/profiles')
 def index():
-    return 'TO DO'
+    users = db.session.query(User).all()
+    return render_template('index.html' , users=users)
+
 
 @app.route('/profile/<user_id>')
 def show(user_id):
