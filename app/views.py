@@ -15,7 +15,7 @@ def root():
 def new():
     form = UserForm()
     
-    if request.headers['Content-Type'] == 'application/json':
+    if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
         users = db.session.query(User).all()
         return user_list_json(users)
     if request.method == 'GET':
