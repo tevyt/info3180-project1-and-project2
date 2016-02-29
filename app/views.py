@@ -41,7 +41,7 @@ def new():
 @app.route('/profiles')
 def index():
     users = db.session.query(User).all()
-    if request.headers['Content-Type'] == 'application/json':
+    if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
         return user_list_json(users)
         
     if len(users) == 0:
@@ -53,17 +53,17 @@ def index():
 def show(user_id):
     user = db.session.query(User).filter_by(user_id=user_id).first()
     if user == None:
-        if request.headers['Content-Type'] == 'application/json':
+        if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
             return jsonify(message="Resource not found") , 404
         return render_template('404.html'), 404
     date = format_date(user.added_on)
-    if request.headers['Content-Type'] == 'application/json' or request.method == 'POST':
+    if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
         return jsonify(userid=user.user_id , username=user.username , image=user.file_location , age=user.age , profile_added_on=date)
     return render_template('show.html', user=user , date=date)
 
 @app.errorhandler(404)
 def page_not_found(e):
-    if request.headers['Content-Type'] == 'application/json':
+    if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
         return jsonify(message="Resource not found") , 404
     return render_template('404.html'), 404
 
